@@ -2,73 +2,148 @@ package ui
 
 import (
 	"dashboard/internal/config/service"
-  "dashboard/internal/config/tag"
+	"dashboard/internal/config/tag"
 )
 
 func pastelise(color string) string {
-  return color + "33"
+	return color + "33"
 }
 
 css tagColors(color string) {
-  background: { pastelise(color) };
-  color: { color };
+	background: { pastelise(color) };
+	color: { color };
 }
-
 
 templ serviceCard(config service.Service, tags tag.Tags) {
-  <a href={config.Link}>
-    <div class="service">
-      <div class="service-content">
-        <iconify-icon class="service-icon" icon={ config.Icon.Name } style={"color: " + config.Icon.Color + ";"}></iconify-icon>
-        <div class="service-right">
-          <span class="service-title">{ config.Title }</span>
-          <span class="service-badges">
-            for _, tagName := range config.Tags {
-              {{ foundTag, err := tags.Lookup(tagName) }}
-              if err == nil && foundTag != nil {
-                <span class={"service-badge", tagColors(foundTag.Color)}>{ foundTag.Name }</span>
-              }
-            }
-          </span>
-        </div>
-      </div>
-    </div>
-  </a>
-}
+	<style>
+    .service {
+      display: inline-flex;
+      background: #fefefe;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 16px;
+      width: max-content;
+      min-width: 0;
+      width: 100%;
+      max-width: 300px;
+      box-sizing: border-box;
+      margin-left: auto;
+      margin-right: auto;
+      transition: box-shadow 0.2s;
+    }
 
+    .service:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        filter: brightness(0.98);
+    }
+
+    .service-content {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .service-icon {
+        background: #eee;
+        border-radius: 20%;
+        padding: 8px;
+        font-size: 2rem;
+    }
+
+    .service-right {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .service-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .service-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .service-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        padding: 4px 12px;
+        font-size: 0.85rem;
+        width: max-content;
+    }
+  </style>
+	<a href={ config.Link }>
+		<div class="service">
+			<div class="service-content">
+				<iconify-icon class="service-icon" icon={ config.Icon.Name } style={ "color: " + config.Icon.Color + ";" }></iconify-icon>
+				<div class="service-right">
+					<span class="service-title">{ config.Title }</span>
+					<span class="service-badges">
+						for _, tagName := range config.Tags {
+							{{ foundTag, err := tags.Lookup(tagName) }}
+							if err == nil && foundTag != nil {
+								<span class={ "service-badge", tagColors(foundTag.Color) }>{ foundTag.Name }</span>
+							}
+						}
+					</span>
+				</div>
+			</div>
+		</div>
+	</a>
+}
 
 templ serviceGroup(title string, services []*service.Service, tags tag.Tags) {
-  <div class="service-group">
-    <h2 class="service-group-title">{ title }</h2>
-    <div class="services">
-      for _, service := range services {
-        @serviceCard(*service, tags)
-      }
-    </div>
-  </div>
+	<style>
+    .service-group {
+        margin-bottom: 50px;
+    }
+
+    .service-group-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+    }
+
+    .services {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+  </style>
+	<div class="service-group">
+		<h2 class="service-group-title">{ title }</h2>
+		<div class="services">
+			for _, service := range services {
+				@serviceCard(*service, tags)
+			}
+		</div>
+	</div>
 }
 
-
 templ ServiceView(services []*service.Service, tags tag.Tags) {
-  {{
-    grouped := service.ByGroup(services)
+	{{
+	grouped := service.ByGroup(services)
 
-  var lists []templ.Component
-  // Add default group (empty group name) first
-  if defaultServices, ok := grouped[service.DefaultGroup]; ok {
-    lists = append(lists, serviceGroup("", defaultServices, tags))
-  }
-  // Add other groups
-  for group, services := range grouped {
-    if group != service.DefaultGroup {
-      lists = append(lists, serviceGroup(string(group), services, tags))
-    }
-  }
-  }}
-
-  <div>
-    for _, child := range lists {
-      @child
-    }
-  </div>
+	var lists []templ.Component
+	// Add default group (empty group name) first
+	if defaultServices, ok := grouped[service.DefaultGroup]; ok {
+		lists = append(lists, serviceGroup("", defaultServices, tags))
+	}
+	// Add other groups
+	for group, services := range grouped {
+		if group != service.DefaultGroup {
+			lists = append(lists, serviceGroup(string(group), services, tags))
+		}
+	}
+	}}
+	<div>
+		for _, child := range lists {
+			@child
+		}
+	</div>
 }

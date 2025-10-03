@@ -22,7 +22,6 @@ func main() {
 	services := ui.ServiceView(cfg.Services, cfg.Tags)
 	layout := ui.Layout(cfg.Title, cfg.BackgroundColor, services)
 
-	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
 	http.Handle("/", templ.Handler(layout))
 
 	http.ListenAndServe(":8080", nil)
