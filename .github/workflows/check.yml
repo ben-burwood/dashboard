@@ -1,0 +1,38 @@
+name: Check Vet, Test, Static
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches-ignore:
+      - "dependabot/*"
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+
+      - run: "go vet ./..."
+
+      - run: "go test ./..."
+
+      - uses: dominikh/staticcheck-action@v1
+        with:
+          version: "2025.1.1"
+          install-go: false
+
+      # See: https://github.com/golangci/golangci-lint/releases
+      - uses: golangci/golangci-lint-action@v8
+        with:
+          version: v2.5.0

@@ -1,0 +1,11 @@
+services:
+  dashboard:
+    container_name: dashboard
+    build: .
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    environment:
+      - DASHBOARD_CONFIG_PATH=/config/config.yml
+    volumes:
+      - ./config:/config:ro
