@@ -1,0 +1,56 @@
+version: 2
+
+project_name: dashboard
+
+before:
+  hooks:
+    - go mod tidy
+    - go tool templ generate
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+
+kos:
+  - repositories: ["ghcr.io/ben-burwood/dashboard"]
+    tags:
+      - "{{.Version}}"
+      - latest
+    bare: true
+    preserve_import_paths: false
+    platforms:
+      - linux/amd64
+      - linux/arm64
+
+# dockers_v2:
+# - dockerfile: Dockerfile
+#   images:
+#     - "ghcr.io/ben-burwood/dashboard"
+#   tags:
+#     - "{{ .Version }}"
+#     - latest
+#   labels:
+#     org.opencontainers.image.title: "{{ .ProjectName }}"
+#     org.opencontainers.image.description: "{{ .ProjectName }}"
+#     org.opencontainers.image.url: "https://github.com/ben-burwood/dashboard"
+#     org.opencontainers.image.source: "https://github.com/ben-burwood/dashboard"
+#     org.opencontainers.image.version: "{{ .Version }}"
+#     org.opencontainers.image.created: "{{ time \"2006-01-02T15:04:05Z07:00\" }}"
+#     org.opencontainers.image.revision: "{{ .FullCommit }}"
+#   platforms:
+#     - linux/amd64
+#     - linux/arm64
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"

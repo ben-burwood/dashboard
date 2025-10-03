@@ -1,1 +1,3 @@
 *_templ.go
+# Added by goreleaser init:
+dist/
