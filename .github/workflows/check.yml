@@ -23,8 +23,12 @@ jobs:
         with:
           go-version: stable
 
-      # TODO - Disabled as Fails against Templ Generation
-      # - run: "go vet ./..."
+      - name: Initialize Go Modules
+        run: go mod tidy
+
+      - run: go tool templ generate
+
+      - run: "go vet ./..."
 
       - run: "go test ./..."
 
