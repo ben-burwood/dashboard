@@ -1,0 +1,46 @@
+title: Dashboard
+background-color: gray
+
+tags:
+  - name: tag1
+    color: "#000000"
+  - name: tag2
+    color: "#0000ff"
+  - name: tag3
+    color: "#008000"
+  - name: tag4
+    color: yellow
+  - name: tag5
+    color: purple
+
+services:
+  - title: Service One
+    description: This is the first service.
+    icon:
+      name: simple-icons:proxmox
+      color: "#E57334"
+    link: https://service1.example.com
+    group: Group A
+    tags: [tag1, tag2, tag4, tag5]
+
+  - title: Service Two
+    description: This is the second service.
+    icon:
+      name: mdi:server
+    link: https://service2.example.com
+    group: Group B
+    tags: [tag2]
+
+  - title: Service Three
+    icon:
+      name: mdi:cloud
+      color: "#2196F3"
+    link: https://service3.example.com
+    group: Group A
+    tags: [tag1, tag3]
+
+  - title: Service Four
+    icon:
+      name: mdi:database
+      color: "#9C27B0"
+    link: https://service4.example.com

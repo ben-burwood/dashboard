@@ -1,0 +1,10 @@
+
+body, html {
+    font-family: 'Helvetica', sans-serif;
+}
+
+.dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

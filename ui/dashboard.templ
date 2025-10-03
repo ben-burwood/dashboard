@@ -1,0 +1,26 @@
+package ui
+
+
+templ head(title string) {
+  <head>
+    <link rel="stylesheet" href="/assets/style/dashboard.css">
+    <link rel="stylesheet" href="/assets/style/service.css">
+
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+
+    <title>{title}</title>
+  </head>
+}
+
+
+templ Layout(title string, backgroundColor string, children templ.Component) {
+  <html>
+    @head(title)
+
+    {{ style := "" }}
+    {{ if backgroundColor != "" { style = "background-color: " + backgroundColor + ";" } }}
+    <body class="dashboard" style={style}>
+      @children
+    </body>
+  </html>
+}
