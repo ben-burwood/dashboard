@@ -1,10 +1,24 @@
 package tag
 
-import "errors"
+import (
+	"errors"
+	"slices"
+)
 
 var (
 	ErrInvalidTagConfiguration = errors.New("invalid Tag Configuration")
 )
+
+var colorVariants = []string{
+	"primary",
+	"secondary",
+	"accent",
+	"info",
+	"success",
+	"warning",
+	"error",
+	"neutral",
+}
 
 type Tag struct {
 	Name  string `yaml:"name"`
@@ -12,6 +26,11 @@ type Tag struct {
 }
 
 type Tags []*Tag
+
+// EnsureColorVariant checks that the tag color is one of the predefined variants
+func (tag *Tag) EnsureColorVariant() bool {
+	return slices.Contains(colorVariants, tag.Color)
+}
 
 // EnsureUnique checks that all tags have unique names
 func (tags Tags) EnsureUnique() error {

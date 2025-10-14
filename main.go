@@ -1,12 +1,10 @@
 package main
 
 import (
+	"dashboard/internal/api"
 	"dashboard/internal/config"
-	"dashboard/ui"
 	"net/http"
 	"os"
-
-	"github.com/a-h/templ"
 )
 
 const (
@@ -19,12 +17,13 @@ func main() {
 		panic(err)
 	}
 
-	services := ui.ServiceView(cfg.Services, cfg.Tags)
-	layout := ui.Layout(cfg.Title, cfg.BackgroundColor, services)
+	mux := http.NewServeMux()
+	mux.HandleFunc("GET /api/config", api.ConfigHandler(cfg))
 
-	http.Handle("/", templ.Handler(layout))
+	// Serve Static Frontend
+	mux.Handle("/", http.FileServer(http.Dir("./frontend/dist")))
 
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe("[::]:8080", api.CORSMiddleware(mux))
 }
 
 // loadConfiguration loads the configuration from the path specified in the DASHBOARD_CONFIG_PATH environment variable
