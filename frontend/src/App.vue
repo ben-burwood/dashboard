@@ -6,7 +6,7 @@
         :key="group"
         :title="group"
         :services="groupServices"
-        :tags="config.Tags" />
+        :tags="config?.Tags ?? []" />
     </div>
   </div>
 </template>
