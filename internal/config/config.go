@@ -19,8 +19,6 @@ const (
 	// DefaultConfigurationFilePath is the default path that will be used to search for the configuration file
 	// if a custom path isn't configured through the DASHBOARD_CONFIG_PATH environment variable
 	DefaultConfigurationFilePath = "config/config.yml"
-
-	DefaultTitle = "Dashboard"
 )
 
 var (
@@ -32,10 +30,8 @@ var (
 )
 
 type Config struct {
-	Title           string             `yaml:"title,omitempty"`
-	BackgroundColor string             `yaml:"background-color,omitempty"`
-	Tags            tag.Tags           `yaml:"tags,omitempty"`
-	Services        []*service.Service `yaml:"services,omitempty"`
+	Tags     tag.Tags           `yaml:"tags,omitempty"`
+	Services []*service.Service `yaml:"services,omitempty"`
 }
 
 // LoadConfig loads the configuration from the specified path. If the path is a directory, all .yml and .yaml files
