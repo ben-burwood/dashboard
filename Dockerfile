@@ -1,28 +1,27 @@
-FROM golang:latest AS build
+FROM --platform=$BUILDPLATFORM golang:alpine AS build
+
+ARG TARGETOS
+ARG TARGETARCH
 
 WORKDIR /app
 
 COPY go.mod go.sum ./
 
 RUN go mod download
-
 RUN go install github.com/a-h/templ/cmd/templ@latest
 
-COPY . /app
+COPY . .
 
 RUN templ generate
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /entrypoint
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o /server
 
-FROM gcr.io/distroless/static-debian11 AS release
+FROM scratch
 
 WORKDIR /
 
-COPY --from=build /entrypoint /entrypoint
-COPY --from=build /app/assets /assets
+COPY --from=build /server /server
 
 EXPOSE 8080
 
-USER nonroot:nonroot
-
-ENTRYPOINT ["/entrypoint"]
+ENTRYPOINT ["/server"]
