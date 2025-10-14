@@ -162,5 +162,10 @@ func validateTagsConfig(config *Config) error {
 	if err := config.Tags.EnsureUnique(); err != nil {
 		return fmt.Errorf("invalid tag configuration: %w", err)
 	}
+	for _, tag := range config.Tags {
+		if !tag.EnsureColorVariant() {
+			return fmt.Errorf("invalid tag color variant for tag %s: %s", tag.Name, tag.Color)
+		}
+	}
 	return nil
 }

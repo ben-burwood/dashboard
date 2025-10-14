@@ -68,3 +68,20 @@ func TestLookup_EmptyTags(t *testing.T) {
 		t.Errorf("expected nil tag for missing name in empty slice, got: %+v", tag)
 	}
 }
+
+func TestEnsureColorVariant(t *testing.T) {
+	validColors := []string{"primary", "secondary", "accent", "info", "success", "warning", "error"}
+	for _, color := range validColors {
+		tag := &Tag{Name: "Test", Color: color}
+		if !tag.EnsureColorVariant() {
+			t.Errorf("expected color '%s' to be valid", color)
+		}
+	}
+	invalidColors := []string{"red", "blue", "#ff0000", "", "Primary", "successs"}
+	for _, color := range invalidColors {
+		tag := &Tag{Name: "Test", Color: color}
+		if tag.EnsureColorVariant() {
+			t.Errorf("expected color '%s' to be invalid", color)
+		}
+	}
+}
