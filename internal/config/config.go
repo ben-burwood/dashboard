@@ -30,6 +30,7 @@ var (
 )
 
 type Config struct {
+	Title    string             `yaml:"title,omitempty"`
 	Tags     tag.Tags           `yaml:"tags,omitempty"`
 	Services []*service.Service `yaml:"services,omitempty"`
 }

@@ -1,12 +1,15 @@
 <template>
-  <div class="hero min-h-screen bg-gray-100">
-    <div class="hero-content flex flex-col items-start gap-10">
-      <ServiceGroup
+  <div class="min-h-screen bg-gray-100">
+  <h2 v-if="config?.Title" class="text-4xl font-semibold text-center text-gray-600 tracking-wide py-4">{{ config.Title }}</h2>
+    <div class="hero">
+      <div class="hero-content flex flex-col items-start gap-10">
+        <ServiceGroup
         v-for="(groupServices, group) in grouped"
         :key="group"
         :title="group"
         :services="groupServices"
         :tags="config?.Tags ?? []" />
+      </div>
     </div>
   </div>
 </template>
