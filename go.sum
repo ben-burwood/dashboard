@@ -1,7 +1,7 @@
 github.com/TwiN/deepmerge v0.2.2 h1:FUG9QMIYg/j2aQyPPhA3XTFJwXSNHI/swaR4Lbyxwg4=
 github.com/TwiN/deepmerge v0.2.2/go.mod h1:4OHvjV3pPNJCJZBHswYAwk6rxiD8h8YZ+9cPo7nu4oI=
-github.com/google/yamlfmt v0.19.0 h1:CX1eZYMIJFjSvQn87hhYNAS6ZYQYSfxnpLezdbZC3qo=
-github.com/google/yamlfmt v0.19.0/go.mod h1:gs0UEklJOYkUJ+OOCG0hg9n+DzucKDPlJElTUasVNK8=
+github.com/google/yamlfmt v0.20.0 h1:EfMuMFEZGnXPn2NY+KgJTH9sNs6P+am/Of6IwE2K6P8=
+github.com/google/yamlfmt v0.20.0/go.mod h1:gs0UEklJOYkUJ+OOCG0hg9n+DzucKDPlJElTUasVNK8=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
