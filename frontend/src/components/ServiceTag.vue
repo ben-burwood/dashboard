@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Tag } from '@/types/service';
+import type { Tag } from "@/types/service";
 
 defineProps<{ tag: Tag }>();
 
@@ -18,7 +18,8 @@ const colorVariants = {
     warning: "badge-warning",
     error: "badge-error",
     neutral: "badge-neutral",
-}
+};
 
-const getBadgeClass = (color: string) => colorVariants[color as keyof typeof colorVariants];
+const getBadgeClass = (color: string) =>
+    colorVariants[color as keyof typeof colorVariants];
 </script>
