@@ -34,4 +34,7 @@ COPY --from=build-vue /app/frontend/dist /frontend/dist
 
 EXPOSE 8080
 
+COPY --from=ghcr.io/tarampampam/microcheck:1 /bin/httpcheck /bin/httpcheck
+HEALTHCHECK --interval=30s --timeout=3s --retries=3 --start-period=10s CMD ["httpcheck", "http://localhost:8080"]
+
 ENTRYPOINT ["/server"]
