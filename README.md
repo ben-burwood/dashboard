@@ -41,6 +41,9 @@ The Configuration for the Homepage is defined in the config/ Yaml Files (Configu
 | Title     | string                 | `title`       | Title of the dashboard            |
 | Tags      | []string (tag.Tags)    | `tags`        | List of tags                      |
 | Services  | []*Service             | `services`    | List of service objects           |
+| Favicon   | string                 | `favicon`     | Page icon (optional)              |
+
+The `favicon` accepts an Iconify name (e.g. `mdi:view-dashboard`, served from the Iconify SVG API), or a URL / path / `data:` URI. 
 
 
 ### Tags

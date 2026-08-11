@@ -31,6 +31,7 @@ var (
 
 type Config struct {
 	Title    string             `yaml:"title,omitempty"`
+	Favicon  string             `yaml:"favicon,omitempty"`
 	Tags     tag.Tags           `yaml:"tags,omitempty"`
 	Services []*service.Service `yaml:"services,omitempty"`
 }
