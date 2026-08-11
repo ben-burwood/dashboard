@@ -1,3 +1,10 @@
 *_templ.go
 # Added by goreleaser init:
 dist/
+
+# Python static-site builder
+build/
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/

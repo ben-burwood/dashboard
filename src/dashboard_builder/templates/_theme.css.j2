@@ -1,0 +1,38 @@
+{# Light/dark Palette.
+    The single source of theme colours: structural rules in index.html.j2 reference these custom properties,
+    adding a theme or tweaking a colour only happens here. #}
+:root {
+  /* surfaces */
+  --color-page-bg: #e5e7eb;   /* gray-200 */
+  --color-page-fg: #111827;   /* gray-900 */
+  --color-card-bg: #ffffff;
+  --color-icon-bg: #f3f4f6;   /* gray-100 */
+  --color-toggle-fg: #111827; /* gray-900 */
+  /* tag pills: bg-*-100 / text-*-700 */
+  --badge-primary-bg: #e0e7ff;   --badge-primary-fg: #4338ca;
+  --badge-secondary-bg: #f3e8ff; --badge-secondary-fg: #7e22ce;
+  --badge-accent-bg: #ccfbf1;    --badge-accent-fg: #0f766e;
+  --badge-info-bg: #e0f2fe;      --badge-info-fg: #0369a1;
+  --badge-success-bg: #dcfce7;   --badge-success-fg: #15803d;
+  --badge-warning-bg: #fef3c7;   --badge-warning-fg: #b45309;
+  --badge-error-bg: #fee2e2;     --badge-error-fg: #b91c1c;
+  --badge-neutral-bg: #e5e7eb;   --badge-neutral-fg: #374151;
+}
+
+.dark {
+  /* surfaces */
+  --color-page-bg: #111827;   /* gray-900 */
+  --color-page-fg: #f3f4f6;   /* gray-100 */
+  --color-card-bg: #1f2937;   /* gray-800 */
+  --color-icon-bg: #374151;   /* gray-700 */
+  --color-toggle-fg: #f3f4f6; /* gray-100 */
+  /* tag pills: bg-*-500 @20% / text-*-300 */
+  --badge-primary-bg: rgb(99 102 241 / 0.2);   --badge-primary-fg: #a5b4fc;
+  --badge-secondary-bg: rgb(168 85 247 / 0.2); --badge-secondary-fg: #d8b4fe;
+  --badge-accent-bg: rgb(20 184 166 / 0.2);    --badge-accent-fg: #5eead4;
+  --badge-info-bg: rgb(14 165 233 / 0.2);      --badge-info-fg: #7dd3fc;
+  --badge-success-bg: rgb(34 197 94 / 0.2);    --badge-success-fg: #86efac;
+  --badge-warning-bg: rgb(245 158 11 / 0.2);   --badge-warning-fg: #fcd34d;
+  --badge-error-bg: rgb(239 68 68 / 0.2);      --badge-error-fg: #fca5a5;
+  --badge-neutral-bg: rgb(75 85 99 / 0.4);     --badge-neutral-fg: #d1d5db;
+}

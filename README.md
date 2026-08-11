@@ -60,3 +60,24 @@ Custom Tags can be defined (see example). The color for each tag must be one of:
 | Description | string       | `description` | Service description (optional)    |
 | Group       | Group        | `group`       | Service group (optional)          |
 | Tags        | []string     | `tags`        | List of tags (optional)           |
+
+## Static build (Python)
+
+As an alternative to running the Go server + Vue frontend, a small Python
+builder ([`dashboard-builder`](pyproject.toml)) reads the **same** `config/`
+YAML and renders a single self-contained `build/index.html` you can open
+directly (`file://`) or drop on any static host. It reproduces the app's look
+(icons via the Iconify CDN, dark-mode toggle), so no server or runtime fetch is
+needed. This lives alongside the Go/Vue app and changes nothing about it.
+
+Run it with [uv](https://docs.astral.sh/uv/):
+
+```sh
+# from the repo (config path defaults to config/config.yml)
+uvx --from . dashboard-builder                          # -> build/index.html
+# pass a config path explicitly, and/or choose the output file
+uv run dashboard-builder config/config.yml --out build/index.html
+```
+
+To rebuild after editing the config, run the command again. Tests:
+`uv run --group dev pytest`.

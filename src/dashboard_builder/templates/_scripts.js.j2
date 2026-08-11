@@ -1,0 +1,19 @@
+// Theme handling;
+// loaded in <head> so the initial theme is applied before first paint (no flash).
+
+// Apply the saved theme (or the OS preference when none is saved).
+(function () {
+  try {
+    var saved = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved === 'dark' || (!saved && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    }
+  } catch (e) {}
+})();
+
+// Toggle + persist the theme (wired to the theme button's onclick).
+function __toggleTheme() {
+  var isDark = document.documentElement.classList.toggle('dark');
+  try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) {}
+}
