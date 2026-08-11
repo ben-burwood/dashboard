@@ -6,16 +6,14 @@
         >
             {{ config.Title }}
         </h2>
-        <div class="flex justify-center px-4">
-            <div class="flex flex-col items-start gap-10 py-8">
-                <ServiceGroup
-                    v-for="(groupServices, group) in grouped"
-                    :key="group"
-                    :title="group"
-                    :services="groupServices"
-                    :tags="config?.Tags ?? []"
-                />
-            </div>
+        <div class="mx-auto flex max-w-7xl flex-col items-start gap-10 px-4 py-8">
+            <ServiceGroup
+                v-for="(groupServices, group) in grouped"
+                :key="group"
+                :title="group"
+                :services="groupServices"
+                :tags="config?.Tags ?? []"
+            />
         </div>
         <ThemeSwitcher class="fixed bottom-4 right-4" />
     </div>
