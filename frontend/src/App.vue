@@ -1,13 +1,13 @@
 <template>
-    <div class="min-h-screen bg-base-300">
+    <div class="min-h-screen bg-gray-200 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
         <h2
             v-if="config?.Title"
-            class="text-4xl font-semibold text-center text-base-content opacity-60 tracking-wide py-4"
+            class="text-4xl font-semibold text-center opacity-60 tracking-wide py-4"
         >
             {{ config.Title }}
         </h2>
-        <div class="hero">
-            <div class="hero-content flex flex-col items-start gap-10">
+        <div class="flex justify-center px-4">
+            <div class="flex flex-col items-start gap-10 py-8">
                 <ServiceGroup
                     v-for="(groupServices, group) in grouped"
                     :key="group"

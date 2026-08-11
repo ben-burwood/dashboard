@@ -11,7 +11,6 @@ The tech stack is inpired by [gatus](https://github.com/TwiN/gatus) - another re
 - go Http Server
 - VueJS
     - Tailwind CSS
-    - DaisyUI Component Library
     - Iconfiy Icons
 
 ## Deployment
@@ -46,7 +45,7 @@ The Configuration for the Homepage is defined in the config/ Yaml Files (Configu
 
 ### Tags
 
-Custom Tags can be defined (see example). The color for these follows the DaisyUI CSS Color names (https://daisyui.com/docs/colors)
+Custom Tags can be defined (see example). The color for each tag must be one of: `primary`, `secondary`, `accent`, `info`, `success`, `warning`, `error`, `neutral`.
 
 ### Services
 

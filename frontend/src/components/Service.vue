@@ -1,7 +1,7 @@
 <template>
     <a :href="service.Link" class="transition-transform hover:scale-[1.025]">
         <div
-            class="flex items-center gap-4 rounded-2xl bg-base-100 opacity-90 shadow-sm hover:shadow-lg p-4 min-w-[260px] max-w-md"
+            class="flex items-center gap-4 rounded-2xl bg-white dark:bg-gray-800 opacity-90 shadow-sm hover:shadow-lg p-4 min-w-[260px] max-w-md"
         >
             <ServiceIcon :icon="service.Icon" />
             <div class="flex-1">

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="bg-base-200 rounded-[20%] text-4xl flex justify-center items-center p-4"
+        class="bg-gray-100 dark:bg-gray-700 rounded-[20%] text-4xl flex justify-center items-center p-4"
     >
         <iconify-icon :icon="icon.Name" :style="{ color: icon.Color }">
         </iconify-icon>

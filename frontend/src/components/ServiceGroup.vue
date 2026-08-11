@@ -2,7 +2,7 @@
     <section>
         <h2
             v-if="title"
-            class="text-xl tracking-wide mb-2 text-base-content opacity-80 ms-4"
+            class="text-xl tracking-wide mb-2 opacity-80 ms-4"
         >
             {{ title }}
         </h2>
