@@ -13,7 +13,6 @@ export interface Service {
   Link: string;
   Icon: Icon;
   Title: string;
-  Description?: string;
   Group?: string;
   Tags?: string[];
 };

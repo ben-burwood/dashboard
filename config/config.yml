@@ -14,7 +14,6 @@ tags:
 
 services:
   - title: Service One
-    description: This is the first service.
     icon:
       name: simple-icons:proxmox
       color: "#E57334"
@@ -23,7 +22,6 @@ services:
     tags: [tag1, tag2, tag4, tag5]
 
   - title: Service Two
-    description: This is the second service.
     icon:
       name: mdi:server
     link: https://service2.example.com
