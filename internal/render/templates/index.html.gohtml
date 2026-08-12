@@ -3,20 +3,20 @@
 
 <head>
   <meta charset="UTF-8">
-  {% if favicon %}<link rel="icon" href="{{ favicon }}">{% endif %}
+  {{if .Favicon}}<link rel="icon" href="{{ .Favicon }}">{{end}}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <script>
-    {% include "_scripts.js.j2" %}
+    {{template "scripts_js" .}}
   </script>
 
   <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
 
-  <title>{{ title or 'Dashboard' }}</title>
+  <title>{{if .Title}}{{ .Title }}{{else}}Dashboard{{end}}</title>
 
   <style>
-    /* Light/dark palette (custom properties) — see _theme.css.j2 */
-    {% include "_theme.css.j2" %}
+    /* Light/dark palette (custom properties) — see theme.css.gohtml */
+    {{template "theme_css" .}}
 
     *, *::before, *::after { box-sizing: border-box; }
     body { margin: 0; }
@@ -25,7 +25,7 @@
         "Helvetica Neue", Arial, "Noto Sans", sans-serif;
     }
 
-    /* ---- Page (App.vue) ---- */
+    /* ---- Page ---- */
     .page {
       min-height: 100vh;
       background: var(--color-page-bg);
@@ -54,7 +54,7 @@
       padding: 2rem 0;
     }
 
-    /* ---- Group (ServiceGroup.vue) ---- */
+    /* ---- Group ---- */
     .group { margin: 0; }
     .group-title {
       margin: 0 0 0.5rem 0;
@@ -70,7 +70,7 @@
       gap: 1rem;
     }
 
-    /* ---- Card (Service.vue) ---- */
+    /* ---- Card ---- */
     .card-link {
       display: block;
       text-decoration: none;
@@ -94,7 +94,7 @@
       box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     }
 
-    /* ---- Icon tile (ServiceIcon.vue) ---- */
+    /* ---- Icon tile ---- */
     .icon-tile {
       background: var(--color-icon-bg);
       border-radius: 20%;
@@ -120,7 +120,7 @@
       gap: 0.5rem;
     }
 
-    /* ---- Tag pill (ServiceTag.vue) ---- */
+    /* ---- Tag pill ---- */
     .badge {
       display: inline-flex;
       align-items: center;
@@ -144,37 +144,37 @@
 
 <body>
   <div class="page">
-    {% if title %}<h2 class="page-title">{{ title }}</h2>{% endif %}
+    {{if .Title}}<h2 class="page-title">{{ .Title }}</h2>{{end}}
     <div class="page-body">
       <div class="groups">
-        {% for group in groups %}
+        {{range .Groups}}
         <section class="group">
-          {% if group.title %}<h2 class="group-title">{{ group.title }}</h2>{% endif %}
+          {{if .Title}}<h2 class="group-title">{{ .Title }}</h2>{{end}}
           <div class="cards">
-            {% for sv in group.services %}
-            <a class="card-link" href="{{ sv.service.link }}">
+            {{range .Services}}
+            <a class="card-link" href="{{ .Link }}">
               <div class="card">
                 <div class="icon-tile">
-                  <iconify-icon icon="{{ sv.service.icon.name }}" style="color: {{ sv.service.icon.color }}"></iconify-icon>
+                  <iconify-icon icon="{{ .IconName }}" style="color: {{ .IconColor }}"></iconify-icon>
                 </div>
                 <div class="card-body">
-                  <h3 class="card-title">{{ sv.service.title }}</h3>
+                  <h3 class="card-title">{{ .Title }}</h3>
                   <span class="tags">
-                    {% for tag in sv.tags %}
-                    <span class="badge badge-{{ tag.color }}">{{ tag.name }}</span>
-                    {% endfor %}
+                    {{range .Tags}}
+                    <span class="badge badge-{{ .Color }}">{{ .Name }}</span>
+                    {{end}}
                   </span>
                 </div>
               </div>
             </a>
-            {% endfor %}
+            {{end}}
           </div>
         </section>
-        {% endfor %}
+        {{end}}
       </div>
     </div>
 
-    {% include "_theme_switcher.html.j2" %}
+    {{template "theme_switcher" .}}
   </div>
 </body>
 

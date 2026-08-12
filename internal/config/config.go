@@ -64,10 +64,10 @@ func LoadConfig(configPath string) (*Config, error) {
 				return fmt.Errorf("error walking path %s: %w", path, err)
 			}
 			if strings.Contains(path, "..") {
-				log.Println("[config.LoadConfiguration] Ignoring configuration from %s", path)
+				log.Printf("[config.LoadConfiguration] Ignoring configuration from %s", path)
 				return nil
 			}
-			log.Println("[config.LoadConfiguration] Reading configuration from %s", path)
+			log.Printf("[config.LoadConfiguration] Reading configuration from %s", path)
 			data, err := os.ReadFile(path)
 			if err != nil {
 				return fmt.Errorf("error reading configuration from file %s: %w", path, err)
@@ -79,7 +79,7 @@ func LoadConfig(configPath string) (*Config, error) {
 			return nil, fmt.Errorf("error reading configuration from directory %s: %w", usedConfigPath, err)
 		}
 	} else {
-		log.Println("[config.LoadConfiguration] Reading configuration from configFile=%s", usedConfigPath)
+		log.Printf("[config.LoadConfiguration] Reading configuration from configFile=%s", usedConfigPath)
 		if data, err := os.ReadFile(usedConfigPath); err != nil {
 			return nil, fmt.Errorf("error reading configuration from directory %s: %w", usedConfigPath, err)
 		} else {

@@ -1,6 +1,4 @@
-{# Light/dark Palette.
-    The single source of theme colours: structural rules in index.html.j2 reference these custom properties,
-    adding a theme or tweaking a colour only happens here. #}
+{{define "theme_css" -}}
 :root {
   /* surfaces */
   --color-page-bg: #e5e7eb;   /* gray-200 */
@@ -36,3 +34,4 @@
   --badge-error-bg: rgb(239 68 68 / 0.2);      --badge-error-fg: #fca5a5;
   --badge-neutral-bg: rgb(75 85 99 / 0.4);     --badge-neutral-fg: #d1d5db;
 }
+{{- end}}

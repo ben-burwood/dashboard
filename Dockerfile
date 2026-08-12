@@ -1,15 +1,3 @@
-FROM node:latest AS build-vue
-
-WORKDIR /app/frontend
-
-COPY frontend/package*.json ./
-
-RUN npm install
-
-COPY frontend/. .
-
-RUN npm run build
-
 FROM --platform=$BUILDPLATFORM golang:alpine AS build-go
 
 ARG TARGETOS
@@ -30,7 +18,6 @@ FROM scratch
 WORKDIR /
 
 COPY --from=build-go /server /server
-COPY --from=build-vue /app/frontend/dist /frontend/dist
 
 EXPOSE 8080
 

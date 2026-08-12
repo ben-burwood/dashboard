@@ -1,6 +1,6 @@
 # Dashboard
 
-Simple Dashboard (<3MB RAM) written in go/vue.
+Simple Dashboard (<3MB RAM) written in Go.
 
 Inspired stylistically by [mafl](https://github.com/hywax/mafl) - great project but I wanted something much simpler and smaller.
 
@@ -9,9 +9,11 @@ Inspired stylistically by [mafl](https://github.com/hywax/mafl) - great project 
 The tech stack is inpired by [gatus](https://github.com/TwiN/gatus) - another reat project with a simple go configuration file approach to Uptime Monitoring.
 
 - go Http Server
-- VueJS
-    - Tailwind CSS
-    - Iconfiy Icons
+- Server-side rendered HTML (`html/template`)
+    - Hand-written CSS with light/dark themes
+    - Iconify Icons (loaded from the Iconify CDN at view time)
+
+The same binary can render the dashboard to a single self-contained HTML file — see [Static build](#static-build).
 
 ## Deployment
 
@@ -61,23 +63,14 @@ Custom Tags can be defined (see example). The color for each tag must be one of:
 | Group       | Group        | `group`       | Service group (optional)          |
 | Tags        | []string     | `tags`        | List of tags (optional)           |
 
-## Static build (Python)
+## Static build
 
-As an alternative to running the Go server + Vue frontend, a small Python
-builder ([`dashboard-builder`](pyproject.toml)) reads the **same** `config/`
-YAML and renders a single self-contained `build/index.html` you can open
-directly (`file://`) or drop on any static host. It reproduces the app's look
-(icons via the Iconify CDN, dark-mode toggle), so no server or runtime fetch is
-needed. This lives alongside the Go/Vue app and changes nothing about it.
-
-Run it with [uv](https://docs.astral.sh/uv/):
+As an alternative to running the server, the same binary can render the dashboard to a single self-contained `build/index.html`.
+It's the exact same output the server serves (icons via the Iconify CDN, dark-mode toggle), so no server or runtime fetch is needed.
 
 ```sh
-# from the repo (config path defaults to config/config.yml)
-uvx --from . dashboard-builder                          # -> build/index.html
-# pass a config path explicitly, and/or choose the output file
-uv run dashboard-builder config/config.yml --out build/index.html
+# config path comes from DASHBOARD_CONFIG_PATH, defaulting to config/config.yml
+go run . -build                          # -> build/index.html
+# choose the output file
+go run . -build -out build/index.html
 ```
-
-To rebuild after editing the config, run the command again. Tests:
-`uv run --group dev pytest`.
