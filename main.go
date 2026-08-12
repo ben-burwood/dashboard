@@ -1,10 +1,10 @@
 package main
 
 import (
-	"dashboard/internal/config"
-	"dashboard/internal/render"
 	"flag"
 	"fmt"
+	"github.com/ben-burwood/dashboard/internal/config"
+	"github.com/ben-burwood/dashboard/internal/render"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -20,9 +20,10 @@ const (
 func main() {
 	build := flag.Bool("build", false, "render the dashboard to a static HTML file and exit (instead of serving)")
 	out := flag.String("out", DefaultBuildOutputPath, "output path for --build")
+	configPath := flag.String("config", "", "config file or directory (overrides $"+DashboardConfigPathEnvVar+")")
 	flag.Parse()
 
-	cfg, err := loadConfiguration()
+	cfg, err := loadConfiguration(*configPath)
 	if err != nil {
 		panic(err)
 	}
@@ -63,8 +64,12 @@ func writeBuild(path string, page []byte) error {
 	return os.WriteFile(path, page, 0o644)
 }
 
-// loadConfiguration loads the configuration from the path specified in the DASHBOARD_CONFIG_PATH environment variable
-func loadConfiguration() (*config.Config, error) {
-	configPath := os.Getenv(DashboardConfigPathEnvVar)
+// loadConfiguration resolves the config path from the -config flag, falling back
+// to the DASHBOARD_CONFIG_PATH environment variable. When neither is set, an empty
+// path is passed and config.LoadConfig applies its own default (config/config.yml).
+func loadConfiguration(configPath string) (*config.Config, error) {
+	if configPath == "" {
+		configPath = os.Getenv(DashboardConfigPathEnvVar)
+	}
 	return config.LoadConfig(configPath)
 }

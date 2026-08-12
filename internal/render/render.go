@@ -7,9 +7,9 @@ import (
 	"embed"
 	"html/template"
 
-	"dashboard/internal/config"
-	"dashboard/internal/config/service"
-	"dashboard/internal/config/tag"
+	"github.com/ben-burwood/dashboard/internal/config"
+	"github.com/ben-burwood/dashboard/internal/config/service"
+	"github.com/ben-burwood/dashboard/internal/config/tag"
 )
 
 //go:embed templates/*.gohtml

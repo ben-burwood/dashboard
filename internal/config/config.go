@@ -1,10 +1,10 @@
 package config
 
 import (
-	"dashboard/internal/config/service"
-	"dashboard/internal/config/tag"
 	"errors"
 	"fmt"
+	"github.com/ben-burwood/dashboard/internal/config/service"
+	"github.com/ben-burwood/dashboard/internal/config/tag"
 	"io/fs"
 	"log"
 	"os"

@@ -1,4 +1,4 @@
-module dashboard
+module github.com/ben-burwood/dashboard
 
 go 1.25.0
 
