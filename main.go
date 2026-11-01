@@ -25,7 +25,8 @@ func main() {
 
 	cfg, err := loadConfiguration(*configPath)
 	if err != nil {
-		panic(err)
+		fmt.Fprintf(os.Stderr, "error loading config: %v (set -config or $%s, default %s)\n", err, DashboardConfigPathEnvVar, config.DefaultConfigurationFilePath)
+		os.Exit(1)
 	}
 
 	page, err := render.Render(cfg)

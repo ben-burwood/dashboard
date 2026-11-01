@@ -74,3 +74,8 @@ go run . -build                          # -> build/index.html
 # choose the output file
 go run . -build -out build/index.html
 ```
+
+```sh
+go run github.com/ben-burwood/dashboard@latest -build -out build/index.html
+go run github.com/ben-burwood/dashboard@latest -build -config path/to/config.yml
+```
